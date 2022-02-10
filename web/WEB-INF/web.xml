@@ -4,9 +4,17 @@
         <servlet-name>ProductoCTO</servlet-name>
         <servlet-class>control.ProductoCTO</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MiSeccionCTO</servlet-name>
+        <servlet-class>MiSesionCTO</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductoCTO</servlet-name>
         <url-pattern>/ProductoCTO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MiSeccionCTO</servlet-name>
+        <url-pattern>/MiSeccionCTO</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
