@@ -16,6 +16,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modelo.dao.UsuarioDAO;
+import modelo.dto.UsuarioDTO;
 
 /**
  *
@@ -40,8 +43,19 @@ public class MiSesionCTO extends HttpServlet {
             
             switch(accion){
                 case "validar":{
+                    UsuarioDAO dao = new UsuarioDAO();
                     String usuario = request.getParameter("txtUsuario");
                     String clave = asegurarClave(request.getParameter("txtPass"));
+                    UsuarioDTO dto = new UsuarioDTO(usuario,clave);
+                    dto = dao.valSesion(dto);
+                    if(dto !=null){
+                        HttpSession session = request.getSession();
+                        session.setAttribute("usActual", dto);
+                        request.getRequestDispatcher("ProductoCTO?accion=listar_datos").forward(request, response);
+                    }else{
+                        System.out.println("No valido");
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
+                    }
                     
                     break;
                 }
